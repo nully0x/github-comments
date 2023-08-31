@@ -8,7 +8,7 @@ const app: Express = express();
 
 app.use(express.json());
 
-app.get('/status', (req: Request, res: Response) => {
+app.get('/api/status', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
