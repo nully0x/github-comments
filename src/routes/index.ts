@@ -1,13 +1,13 @@
 import {Router} from "express"
-import prCommenter from "./prCommenter"
+import prComments from "./pullRequest"
+import issueComments from "./issues"
 
 const router = Router()
 
 
-router.use("/pr-commenter", prCommenter)
+router.use("/pr-comments", prComments)
+router.use("/issue-comments", issueComments)
 
 
 
 export default router
-
-
