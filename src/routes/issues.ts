@@ -26,7 +26,7 @@ router.get("/", async (req: Request, res: Response) => {
       console.error("GraphQL errors:", response.data.errors);
       res.status(500).json({ error: "GraphQL error" });
     } else {
-      const issues = response.data.data.user;
+      const issues = response.data.data.user.issues;
       res.send(issues)
     }
   } catch (error) {
