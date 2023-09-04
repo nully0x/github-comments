@@ -6,7 +6,7 @@ const router = Router()
 
 
 router.use("/pr-comments", prComments)
-router.use("/issue-comments", issueComments)
+router.use("/issue", issueComments)
 
 
 
