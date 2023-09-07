@@ -14,7 +14,6 @@ router.get("/metadata", async (req: Request, res: Response) => {
 
   try {
     const prData = await fetchGitHubData(username, query);
-    console.log(prData);
 
     //Open & active (total comments on PR, days since opening)
     const openPRs = prData.pullRequests.edges.filter(
@@ -101,8 +100,8 @@ router.get("/metadata", async (req: Request, res: Response) => {
       mergedPRData: mergedPRData,
     });
   } catch (error) {
-    console.error("Error fetching user data:", error);
     res.status(500).json({ error: "Error fetching user data from GitHub" });
+    throw new Error(error);
   }
 });
 
