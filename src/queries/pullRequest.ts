@@ -2,28 +2,18 @@
 export const query: string = `
     query ($username: String!){
       user(login: $username) {
-        pullRequests(last:100) {
-          edges {
-            node {
-              url
-              permalink
-              bodyText
-              author {
-                login
-              }
+        pullRequests(last:100){
+          edges{
+            node{
+              totalCommentsCount
+              merged
               mergedAt
+              closed
+              url
               closedAt
-              number
-              comments (last:100) {
-                edges {
-                  node {
-                    author {
-                      login
-                    }
-                    url
-                    body
-                  }
-                }
+              createdAt
+              mergedBy{
+                login
               }
             }
           }
