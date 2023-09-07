@@ -5,7 +5,7 @@ import issueComments from "./issues"
 const router = Router()
 
 
-router.use("/pr-comments", prComments)
+router.use("/pr", prComments)
 router.use("/issue", issueComments)
 
 

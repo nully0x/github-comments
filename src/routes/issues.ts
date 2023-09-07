@@ -79,6 +79,7 @@ router.get("/long-comments", async (req: Request, res: Response) => {
       url: comment.url,
       date: comment.createdAt,
       repo_url: comment.repository.url,
+      author: comment.issue.author.login
     }));
 
     res.json(processedComments);
