@@ -20,6 +20,8 @@ router.get("/metadata", async (req: Request, res: Response) => {
       (pr: any) => pr.node.closed === false
     );
 
+  console.log(openPRs)
+
     const openPRsData = openPRs.map((pr: any) => ({
       totalComments: pr.node.totalCommentsCount,
       daysSinceOpening: Math.floor(
