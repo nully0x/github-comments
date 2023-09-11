@@ -4,7 +4,7 @@ import { query } from "../queries/issues";
 
 const router = Router();
 
-router.get("/own-issue", async (req: Request, res: Response) => {
+router.get("/own", async (req: Request, res: Response) => {
   const { username } = req.body;
 
   if (!username || "") {
@@ -31,7 +31,7 @@ router.get("/own-issue", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/others-issue", async (req: Request, res: Response) => {
+router.get("/others", async (req: Request, res: Response) => {
   const { username } = req.body;
 
   if (!username || "") {

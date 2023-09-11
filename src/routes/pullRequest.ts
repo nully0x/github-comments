@@ -5,7 +5,7 @@ import { DAYS_TO_INACTIVE, CURRENT_DAY, ONE_DAY } from "../helpers/constants"
 
 const router = Router();
 
-router.get("/metadata", async (req: Request, res: Response) => {
+router.get("/pulls", async (req: Request, res: Response) => {
   const { username } = req.body;
 
   if (!username || "") {
@@ -19,8 +19,6 @@ router.get("/metadata", async (req: Request, res: Response) => {
     const openPRs = prData.pullRequests.edges.filter(
       (pr: any) => pr.node.closed === false
     );
-
-  console.log(openPRs)
 
     const openPRsData = openPRs.map((pr: any) => ({
       totalComments: pr.node.totalCommentsCount,
