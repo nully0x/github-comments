@@ -5,6 +5,10 @@ export const query: string = `
         pullRequests(last:100){
           edges{
             node{
+              title
+              repository{
+                url
+              }
               totalCommentsCount
               merged
               mergedAt

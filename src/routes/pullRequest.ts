@@ -27,6 +27,8 @@ router.get("/pulls", async (req: Request, res: Response) => {
           (ONE_DAY)
       ),
       url: pr.node.url,
+      repoUrl: pr.node.repository.url,
+      prTitle: pr.node.title
     }));
 
     // Open & inactive -- idle for 30 days (total comments on PR, days since opening)
@@ -45,6 +47,8 @@ router.get("/pulls", async (req: Request, res: Response) => {
           (ONE_DAY)
       ),
       prUrl: pr.node.url,
+      repoUrl: pr.node.repository.url,
+      prTitle: pr.node.title
     }));
 
     // Closed by author (total comments on PR, days open to close)
@@ -60,6 +64,8 @@ router.get("/pulls", async (req: Request, res: Response) => {
           (ONE_DAY)
       ),
       prUrl: pr.node.url,
+      repoUrl: pr.node.repository.url,
+      prTitle: pr.node.title
     }));
 
     // Closed by others (total comments on PR, days open to close)
@@ -75,6 +81,8 @@ router.get("/pulls", async (req: Request, res: Response) => {
           (ONE_DAY)
       ),
       prUrl: pr.node.url,
+      repoUrl: pr.node.repository.url,
+      prTitle: pr.node.title
     }));
 
     // Merged (total comments on PR, days open to merge)
@@ -90,6 +98,8 @@ router.get("/pulls", async (req: Request, res: Response) => {
           (ONE_DAY)
       ),
       prUrl: pr.node.url,
+      repoUrl: pr.node.repository.url,
+      prTitle: pr.node.title
     }));
 
     res.status(200).json({
