@@ -4,15 +4,14 @@ import { query } from "../queries/issues";
 
 const router = Router();
 
-router.get("/own", async (req: Request, res: Response) => {
+router.get("/own/year", async (req: Request, res: Response) => {
   const { username } = req.body;
 
-  if (!username || "") {
-    res.status(400).json({ error: "Missing username" });
-  }
+  const since = new Date("2023-10-24T00:00:00.000Z");
+  const until = new Date("2023-11-02T03:48:17.000Z");
 
   try {
-    const issueComments = await fetchGitHubData(username, query);
+    const issueComments = await fetchGitHubData(username, query, since, until);
 
     const ownComments = issueComments.issueComments.nodes.filter(
       (comment: any) => comment.issue.author.login === username
@@ -31,62 +30,63 @@ router.get("/own", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/others", async (req: Request, res: Response) => {
-  const { username } = req.body;
 
-  if (!username || "") {
-    res.status(400).json({ error: "Missing username" });
-  }
+// router.get("/others", async (req: Request, res: Response) => {
+//   const { username } = req.body;
 
-  try {
-    const issueComments = await fetchGitHubData(username, query);
+//   if (!username || "") {
+//     res.status(400).json({ error: "Missing username" });
+//   }
 
-    const othersComments = issueComments.issueComments.nodes.filter(
-      (comment: any) => comment.issue.author.login !== username
-    );
+//   try {
+//     const issueComments = await fetchGitHubData(username, query);
 
-    const processedComments = othersComments.map((comment: any) => ({
-      body: comment.body,
-      repo_url: comment.repository.url,
-      url: comment.url,
-      date: comment.createdAt,
-      author: comment.issue.author.login,
-    }));
+//     const othersComments = issueComments.issueComments.nodes.filter(
+//       (comment: any) => comment.issue.author.login !== username
+//     );
 
-    res.json(processedComments);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//     const processedComments = othersComments.map((comment: any) => ({
+//       body: comment.body,
+//       repo_url: comment.repository.url,
+//       url: comment.url,
+//       date: comment.createdAt,
+//       author: comment.issue.author.login,
+//     }));
 
-// long comments > than 500 characters
-router.get("/long-comments", async (req: Request, res: Response) => {
-  const { username } = req.body;
+//     res.json(processedComments);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
-  if (!username || "") {
-    res.status(400).json({ error: "Missing username" });
-  }
+// // long comments > than 500 characters
+// router.get("/long-comments", async (req: Request, res: Response) => {
+//   const { username } = req.body;
 
-  try {
-    const longComment = await fetchGitHubData(username, query);
+//   if (!username || "") {
+//     res.status(400).json({ error: "Missing username" });
+//   }
 
-    const longComments = longComment.issueComments.nodes.filter(
-      (comment: any) => comment.body.length > 500
-    );
+//   try {
+//     const longComment = await fetchGitHubData(username, query);
+
+//     const longComments = longComment.issueComments.nodes.filter(
+//       (comment: any) => comment.body.length > 500
+//     );
     
-    const processedComments = longComments.map((comment: any) => ({
-      body: comment.body,
-      url: comment.url,
-      date: comment.createdAt,
-      repo_url: comment.repository.url,
-      author: comment.issue.author.login
-    }));
+//     const processedComments = longComments.map((comment: any) => ({
+//       body: comment.body,
+//       url: comment.url,
+//       date: comment.createdAt,
+//       repo_url: comment.repository.url,
+//       author: comment.issue.author.login
+//     }));
 
-    res.json(processedComments);
+//     res.json(processedComments);
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
 export default router;

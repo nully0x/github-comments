@@ -1,12 +1,14 @@
 import axios from "axios";
 
-export async function fetchGitHubData(username: string, query: string) {
+export async function fetchGitHubData(username: string, query: string, since: Date, until: Date) {
     try {
       const response = await axios.post(
         "https://api.github.com/graphql",
         {
           query,
           variables: { username },
+          since,
+          until
         },
         {
           headers: {

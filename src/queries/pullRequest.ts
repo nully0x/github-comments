@@ -1,12 +1,15 @@
 // Define the GraphQL query to fetch the user's last 100 comments
 export const query: string = `
-    query ($username: String!){
-      user(login: $username) {
-        pullRequests(last:100){
-          edges{
-            node{
+query($username: String!, $from: DateTime, $to: DateTime, $cursor: String) {
+  user(login: $username) {
+    contributionsCollection(from: $from, to: $to) {
+      pullRequestContributions(first: 100, after: $cursor) {
+        edges {
+          cursor
+          node {
+            pullRequest {
               title
-              repository{
+              repository {
                 url
               }
               totalCommentsCount
@@ -16,11 +19,13 @@ export const query: string = `
               url
               closedAt
               createdAt
-              mergedBy{
+              mergedBy {
                 login
               }
             }
           }
         }
       }
-    }`;
+    }
+  }
+}`;

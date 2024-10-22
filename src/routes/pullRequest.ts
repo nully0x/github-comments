@@ -13,7 +13,7 @@ router.get("/pulls", async (req: Request, res: Response) => {
   }
 
   try {
-    const prData = await fetchGitHubData(username, query);
+    const prData = await fetchGitHubData(username, query, new Date("2021-01-01T00:00:00.000Z"), new Date("2021-12-31T00:00:00.000Z"));
 
     //Open & active (total comments on PR, days since opening)
     const openPRs = prData.pullRequests.edges.filter(
